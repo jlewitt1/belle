@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
 /**
- * Belle internal component to wrap a DisabledDay in a DatePicker.
- *
+ * @description Belle internal component to wrap a DisabledDay in a DatePicker. 
  * This component exists to avoid binding functions in JSX.
  */
+
 export default class DisabledDay extends Component {
 
   static displayName = 'DisabledDay';

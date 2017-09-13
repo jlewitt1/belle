@@ -10,9 +10,106 @@ import unionClassNames from '../utils/union-class-names';
 import Choice from '../components/Choice';
 
 /**
- * Verifies that the children is an array containing only two choices with a
- * different value.
+ * @description Belle's toggle component
+ * 
+ * In addition to the props listed below, you can also use any property valid for a HTML div like style, id, className, onMouseDown, onTouchStart, ...
+ * 
+ * More info:
+ * See live [examples](https://gideonshils.github.io/Belle-With-Bit/).
+ * 
+ * For extended info, go to [Belle](http://nikgraf.github.io/belle/#/component/choice?_k=1fw1fq) documentation.
+ * 
+ * @example Standard example
+ * 
+ * <!-- toggle with custom choices -->
+ * <Toggle defaultValue>
+ * <Choice value>On</Choice>
+ * <Choice value={ false }>Off</Choice>
+ * </Toggle>
+ *
+ * 
+ * @example Internal HTML Structure
+ * 
+ * <div style={ wrapperStyle }
+ *    tabIndex={ tabIndex } >
+ * <div ref={(c) => this.sliderWrapper = c}
+ *      style={ sliderWrapperStyle }>
+ *   <div style={ sliderStyle }>
+ *     <div ref={(c) => this.firstChoice = c}
+ *          style={ firstChoiceStyle }>
+ *       <Choice />
+ *     </div>
+ *     <div ref={(c) => this.secondChoice = c}
+ *          style={ secondChoiceStyle }>
+ *       <Choice />
+ *     </div>
+ *   </div>
+ * </div>
+ * <div ref={(c) => this.handle = c}
+ *      style={ handleStyle } />
+ * </div>
+ * 
+ * 
+ * @example Toggle with custom choices
+ * 
+ * <!-- toggle with custom choices -->
+ * <Toggle defaultValue
+ *       firstChoiceStyle={{ backgroundColor: 'rgba(43, 176, 206, 0.8)' }}>
+ * <Choice value>On</Choice>
+ * <Choice value={ false }>Off</Choice>
+ * </Toggle>
+ * 
+ * 
+ * @example Toggle with adopted size styling - using CSS 'transform' property
+ * When you need to change the size of a component don't forget the CSS transform property. With the -ms- prefix transform is supported back to IE 9.
+ * 
+ * <Toggle style={{ transform: 'scale(0.6)' }} />
+ * 
+ * 
+ * @example Toggle with adopted size styling - using style properties
+ * Toggle can also be re-sized by proportionately changing the size of all the components in structure of Toggle.
+ * 
+ * <Toggle style={{
+ *         borderRadius: 10,
+ *         height: 20,
+ *         width: 50
+ *       }}
+ *       sliderStyle={{
+ *         // Calculated with 2 * the width of choice area
+ *         width: 80
+ *       }}
+ *       sliderWrapperStyle={{
+ *         borderRadius: 10
+ *       }}
+ *       handleStyle={{
+ *         borderRadius: 10,
+ *         // 1 px smaller than the width due the border effect
+ *         height: 19,
+ *         width: 20
+ *       }}
+ *       firstChoiceStyle={{
+ *         height: 20,
+ *         // Calculated with the width of the whole toggle - half of the width from the handle
+ *         width: 40,
+ *         lineHeight: 20 + 'px',
+ *         textIndent: -5,
+ *         fontSize: 12
+ *       }}
+ *       secondChoiceStyle={{
+ *         height: 20,
+ *         // Calculated with the width of the whole toggle - half of the width from the handle
+ *         // style.width - (handleStyle.width / 2 )
+ *         width: 40,
+ *         lineHeight: 20 + 'px',
+ *         textIndent: 5,
+ *         fontSize: 10
+ *       }}
+ *       activeHandleStyle={{
+ *         height: 20
+ *       }} />
+ * 
  */
+
 function validateChoices(props, propName, componentName) {
   const propValue = props[propName];
   if (!propValue) {
@@ -38,18 +135,45 @@ function validateChoices(props, propName, componentName) {
 }
 
 const togglePropTypes = {
+  /**
+   * @property {Object} activeHandleStyle - (optional) Works like React's built-in style property except that it extends the properties from the base handleStyle. Becomes active once the user clicks or touches the toggle (including the first & second choice area).
+   */
   activeHandleStyle: PropTypes.object,
   children: validateChoices,
   className: PropTypes.string,
+  /**
+   * @property {Boolean} defaultValue - (optional) Behaves like the defaultChecked property of a checkbox in React.
+   */
   defaultValue: PropTypes.bool,
+  /**
+   * @property {Boolean} disabled - (default: false) If true the Toggle will be disabled and can't be changed by the user.
+   */
   disabled: PropTypes.bool,
+  /**
+   * @property {Object} disabledHandleStyle - (optional) Works like React's built-in style property except that it extends the properties from the base handleStyle. Becomes active once the Toggle is disabled via the disabled property.
+   */
   disabledHandleStyle: PropTypes.object,
+  /**
+   * @property {Object} disabledStyle - (optional) Works like React's built-in style property except that it extends the properties from the base style. Becomes active once the Toggle is disabled via the disabled property.
+   */
   disabledStyle: PropTypes.object,
+  /**
+   * @property {Object} firstChoiceProps - (optional) This object allows to provide any kind of valid properties for a div tag.
+   */
   firstChoiceProps: PropTypes.object,
+  /**
+   * @property {Object} firstChoiceStyle - (optional) Works like React's built-in style property.
+   */
   firstChoiceStyle: PropTypes.shape({
     width: PropTypes.number,
   }),
+  /**
+   * @property {Object} focusStyle - (optional) Works like React's built-in style property except that it extends the properties from the base style. Becomes active once the Toggle is focused on. Only applies to the handle node.
+   */
   focusStyle: PropTypes.object,
+  /**
+   * @property {Object} handleProps - (optional) This object allows to provide any kind of valid properties for a div tag.
+   */
   handleProps: PropTypes.shape({
     onMouseDown: PropTypes.func,
     onMouseMove: PropTypes.func,
@@ -60,12 +184,21 @@ const togglePropTypes = {
     onTouchEnd: PropTypes.func,
     onTouchCancel: PropTypes.func,
   }),
+  /**
+   * @property {Object} handleStyle - (optional) Works like React's built-in style property. Only applies to the handle node.
+   */
   handleStyle: PropTypes.shape({
     height: PropTypes.number,
     width: PropTypes.number,
   }),
+  /**
+   * @property {Object} hoverHandleStyle - (optional) Works like React's built-in style property except that it extends the properties from the base handleStyle. Becomes active once a user moves the mouse above the Toggle component. Only applies to the handle node.
+   */
   hoverHandleStyle: PropTypes.object,
   onBlur: PropTypes.func,
+  /**
+   * @property {Function} onUpdate - (optional) Callback executed every the toggle switches from true to false or the other way around via user input. onUpdate has one argument which is an object containing the value e.g. { value: true }.
+   */
   onUpdate: PropTypes.func,
   onFocus: PropTypes.func,
   onKeyDown: PropTypes.func,
@@ -74,10 +207,19 @@ const togglePropTypes = {
   onMouseLeave: PropTypes.func,
   onMouseUp: PropTypes.func,
   onTouchStart: PropTypes.func,
+  /**
+   * @property {Object} secondChoiceProps - (optional) This object allows to provide any kind of valid properties for a div tag.
+   */
   secondChoiceProps: PropTypes.object,
+  /**
+   * @property {Object} secondChoiceStyle - (optional) Works like React's built-in style property.
+   */
   secondChoiceStyle: PropTypes.shape({
     width: PropTypes.number,
   }),
+  /**
+   * @property {Object} sliderProps - (optional) This object allows to provide any kind of valid properties for a div tag.
+   */
   sliderProps: PropTypes.shape({
     onClick: PropTypes.func,
     onTouchStart: PropTypes.func,
@@ -85,13 +227,25 @@ const togglePropTypes = {
     onTouchEnd: PropTypes.func,
     onTouchCancel: PropTypes.func,
   }),
+  /**
+   * @property {Object} sliderStyle - (optional) Works like React's built-in style property. Only applies to the slider node.
+   */
   sliderStyle: PropTypes.object,
+  /**
+   * @property {Object} sliderWrapperProps - (optional) This object allows to provide any kind of valid properties for a div tag.
+   */
   sliderWrapperProps: PropTypes.object,
   sliderWrapperStyle: PropTypes.object,
   style: PropTypes.shape({
     width: PropTypes.number,
   }),
+  /**
+   * @property {Boolean} value - (optional) Behaves like the checked property of a checkbox in React.
+   */
   value: PropTypes.bool,
+  /**
+   * @property {BooleanReference} valueLink - (optional) Behaves like the valueLink poperty of a React rendered checkbox. vlaueLink allows to enable two-way data binding between a state property and the value in the user interface.
+   */
   valueLink: PropTypes.shape({
     value: PropTypes.bool.isRequired,
     requestChange: PropTypes.func.isRequired,

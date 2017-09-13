@@ -5,6 +5,15 @@ import Option from '../components/Option';
 import Separator from '../components/Separator';
 
 /**
+ * @description SelectConfig
+ * By default the menu of the Select component is positioned in a way that the focused Option is right above the previously selected one. In order to switch off this behaviour for all Select components in your application change the `shouldPositionOptions` option in config.
+ * 
+ * In order you as developer want to implement your own functionality you you can provide your own positioning function for all Select components. Keep in mind to set make the menu visible e.g. `display: block`.
+ * 
+ * For extended information see the Belle [documentation](http://nikgraf.github.io/belle/#/configuration?_k=pbr5zm)
+ */
+
+/**
  * Returns the index of the entry with a certain value from the component's
  * children.
  *

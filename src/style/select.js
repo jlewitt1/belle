@@ -1,3 +1,20 @@
+/**
+ * @description Used for styling the Belle Select component
+ * 
+ * Belle provides you with the ability to modify the default appearance of its components.
+ * 
+ * @example With this example you overwrite the hover style of default Belle Select Component
+ * 
+ * import SelectStyle from 'bit/style/select-style';
+ * 
+ * SelectStyle.hoverStyle = {
+ *  borderBottom: '3px solid #6FA8D1',
+ * }
+ * 
+ * 
+ * For extended information see the Belle [documentation](http://nikgraf.github.io/belle/#/configuration?_k=pbr5zm)
+ */
+
 const selectStyle = {
   style: {
     borderBottom: '1px solid #CCC',

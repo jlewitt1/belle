@@ -2,6 +2,21 @@ import React, { Component, PropTypes } from 'react';
 import actionAreaStyle from '../style/actionArea';
 import { omit } from '../utils/helpers';
 
+/**
+ * @description Belle's ActionArea component. Used internally.
+ * 
+ * Provides a button like behaviour for a click like interaction within other components. Button can't be used in such
+ * cases as it always will have it's own focus which is not desired in
+ * components like DatePicker e.g. next month button.
+ * 
+ * Note: Use the ActionArea's onUpdate instead of onClick as otherwise on iOS9
+ * 
+ * The ActionArea will trigger onFocus for it's parent with a set tabindex.
+ * 
+ * 
+ * More info:
+ * See live [examples](https://gideonshils.github.io/Belle-With-Bit/)
+ */
 const actionAreaPropTypes = {
   activeStyle: PropTypes.object,
   children: PropTypes.oneOfType([

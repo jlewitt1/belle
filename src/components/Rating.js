@@ -7,42 +7,136 @@ import unionClassNames from '../utils/union-class-names';
 import config from '../config/rating';
 import { requestAnimationFrame, cancelAnimationFrame } from '../utils/animation-frame-management';
 
-const ratingPropTypes = {
-  defaultValue: PropTypes.oneOf([1, 2, 3, 4, 5]),
-  value: PropTypes.oneOf([1, 2, 3, 4, 5]),
-  valueLink: PropTypes.shape({
+/**
+ * @description Belle's rating component
+ * The component leverages 5 characters (by default stars) to allow the user to rate.
+ * 
+ * In addition to the props listed below, you can also use tabIndex, style, className, focusStyle, onMouseDown, onMouseUp, onMouseEnter, onMouseMove, onMouseLeave, onTouchStart, onTouchMove, onTouchEnd, onTouchCancel, onFocus, onBlur, onClick, onKeyDown
+ * 
+ * More info:
+ * See live [examples](https://gideonshils.github.io/Belle-With-Bit/).
+ * For extended info, go to [Belle](http://nikgraf.github.io/belle/#/component/rating?_k=865mcf) documentation.
+ * 
+ * @example Standard example
+ *
+ * <Rating defaultValue={3}></Rating>
+ * 
+ * 
+ * @example Disabled Rating
+ * 
+ * <Rating defaultValue={4} disabled></Rating>
+ * 
+ * 
+ * @example Rating with a custom character
+ * 
+ * <Rating defaultValue={4} character={'✪'}></Rating>
+ * 
+ * 
+ * @example Controlled Rating Component with a Reset Link
+ * Reset rating functionality can be implemented using controlled rating component like this:
+ * 
+ * <Rating valueLink={ this.linkState('customRatingValue') } />
+ *
+ * <a onClick={ this._resetRating }
+ *  style={{
+ *    marginLeft: 20,
+ *    position: 'relative',
+ *    top: -5,
+ *    textDecoration: 'underline',
+ *    cursor: 'pointer'
+ *   }}>Reset</a>
+ *
+ * _resetRating() {
+ * this.setState({
+ *   customRatingValue: undefined
+ * });
+ * }
+ * 
+ */
+
+ /**
+  * @property {Object} wrapperProps - (optional) This object allows to provide any kind of valid properties for a div tag. It allows to extend the div wrapping the whole rating component.
+  * @property {Object} characterProps - (optional) The property can be used to specify any other properties specific to rating character apart from styling. They will be applied to the span wrapping the character.
+  */
+
+  const ratingPropTypes = {
+    /**
+     * @property {Integer (1-5)} defaultValue - (optional) Behaves like the defaultValue poperty of a native input-tag. The rating can be manipulated through the user interface.
+     */
+    defaultValue: PropTypes.oneOf([1, 2, 3, 4, 5]),
+    /**
+     * @property {Integer (1-5)} value - (optional) Behaves like the value poperty of a native input-tag. The rating can not be manipulated through the user interface.
+     */
     value: PropTypes.oneOf([1, 2, 3, 4, 5]),
-    requestChange: PropTypes.func.isRequired,
-  }),
-  disabled: PropTypes.bool,
-  tabIndex: PropTypes.number,
-  character: PropTypes.string,
-  characterProps: PropTypes.object,
-  preventFocusStyleForTouchAndClick: PropTypes.bool,
-  'aria-label': PropTypes.string,
-  style: PropTypes.object,
-  className: PropTypes.string,
-  focusStyle: PropTypes.object,
-  disabledStyle: PropTypes.object,
-  hoverStyle: PropTypes.object,
-  disabledHoverStyle: PropTypes.object,
-  characterStyle: PropTypes.object,
-  activeCharacterStyle: PropTypes.object,
-  hoverCharacterStyle: PropTypes.object,
-  onUpdate: PropTypes.func,
-  onMouseDown: PropTypes.func,
-  onMouseUp: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  onMouseMove: PropTypes.func,
-  onMouseLeave: PropTypes.func,
-  onTouchStart: PropTypes.func,
-  onTouchMove: PropTypes.func,
-  onTouchEnd: PropTypes.func,
-  onTouchCancel: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onKeyDown: PropTypes.func,
-};
+    /**
+     * @property {ValueReference} valueLink - (optional) Behaves like the valueLink poperty of a native input-tag. ValueLink allows to enable two-way data binding between a state property and the value in the user interface.
+     */
+    valueLink: PropTypes.shape({
+      value: PropTypes.oneOf([1, 2, 3, 4, 5]),
+      requestChange: PropTypes.func.isRequired,
+    }),
+    /**
+     * @property {Boolean} disabled - (optional) Can be used to disable rating component.
+     */
+    disabled: PropTypes.bool,
+    tabIndex: PropTypes.number,
+    /**
+     * @property {Character} character - (optional. default: '★') Rating character used in the component.
+     */
+    character: PropTypes.string,
+    characterProps: PropTypes.object,
+    /**
+     * @property {Boolean} preventFocusStyleForTouchAndClick - (optional. default: true) Prevents the focus style being applied in case the buttons becomes focused by a click or touch.
+     */
+    preventFocusStyleForTouchAndClick: PropTypes.bool,
+    'aria-label': PropTypes.string,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    /**
+     * @property {Object} focusStyle - (optional) The property is used to apply a focus style directly to the wrapper. Works like React's built-in style property except that it extends the properties from the base style.
+     */
+    focusStyle: PropTypes.object,
+    /**
+     * @property {Object} disabledStyle - (optional) The property is used to apply a style directly to the wrapper applied when the component is disabled. Works like React's built-in style property except that it extends the properties from the base style.
+     */
+    disabledStyle: PropTypes.object,
+    /**
+     * @property {Object} hoverStyle - (optional) The property is used to apply a style directly to the wrapper applied when the component is hovered. Works like React's built-in style property except that it extends the properties from the base style.
+     */
+    hoverStyle: PropTypes.object,
+    /**
+     * @property {Object} disabledHoverStyle - (optional) The property is used to apply a style directly to the wrapper applied when the component is disabled and is hovered. Works like React's built-in style property except that it extends the properties from the base style.
+     */
+    disabledHoverStyle: PropTypes.object,
+    /**
+     * @property {Object} characterStyle - (optional) The property can be used to specify styling of set rating values and will be applied to the spans wrapping the characters. Behaves like React's built-in style property.
+     */
+    characterStyle: PropTypes.object,
+    /**
+     * @property {Object} activeCharacterStyle - (optional) The property can be used to specify styling of set rating values when a user touches or presses the rating. These styles will be applied to the spans wrapping the characters. Works like React's built-in style property except that it extends the properties from the base characterStyle.
+     */
+    activeCharacterStyle: PropTypes.object,
+    /**
+     * @property {Object} hoverCharacterStyle - (optional) The property can be used to specify styling of set rating values when a user hover them. These styles will be applied to the spans wrapping the characters. Works like React's built-in style property except that it extends the properties from the base characterStyle.
+     */
+    hoverCharacterStyle: PropTypes.object,
+    /**
+     * @property {Function} onUpdate - (optional) Callback executed when a user changes the rating via the user interface. onUpdate has one argument which is an object containing the value e.g. { value: 3 }.
+     */
+    onUpdate: PropTypes.func,
+    onMouseDown: PropTypes.func,
+    onMouseUp: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseMove: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+    onTouchStart: PropTypes.func,
+    onTouchMove: PropTypes.func,
+    onTouchEnd: PropTypes.func,
+    onTouchCancel: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onKeyDown: PropTypes.func,
+  }; 
 
 /**
  * sanitize properties for the wrapping div.

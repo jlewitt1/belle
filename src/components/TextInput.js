@@ -6,25 +6,112 @@ import unionClassNames from '../utils/union-class-names';
 import { omit, has, uniqueId } from '../utils/helpers';
 import style from '../style/text-input';
 
+/**
+ * @description Belle's text input component
+ * Note: The TextInput automatically grows in height once the text becomes too long to fit in. Still every TextInput is just rendered as a simple HTML textarea.
+ * 
+ * In addition to the props listed below, you can also use any other property valid for a HTML textarea like style, placeholder, onClick, ...
+ * 
+ * More info:
+ * See live [examples](https://gideonshils.github.io/Belle-With-Bit/).
+ * 
+ * For extended info, go to [Belle](http://nikgraf.github.io/belle/#/component/text-input?_k=shc6fv) documentation.
+ * 
+ * @example Standard example
+ * 
+ * <!-- TextInput with a defaultValue -->
+ * <TextInput defaultValue="Jane Doe" placeholder="Name" />
+ * 
+ * <!-- TextInput with allowNewLine set to true -->
+ * <TextInput defaultValue="This TextInput has allowNewLine set to true. Just press 'Return' once editing the text." allowNewLine />
+ * 
+ * 
+ * @example TextInput with custom styling & two-way data binding
+ * 
+ * <TextInput minRows={ 3 }
+ *      valueLink={ this.linkState('customTextInputValue') }
+ *      placeholder="Just fill in whatever you like :)"
+ *      style={{
+ *        border: '1px solid #C8C8C8',
+ *        padding: 10,
+ *        width: 280,
+ *        borderRadius: 3,
+ *        boxShadow: 'inset 0 1px 2px #CCC'
+ *      }}
+ *      hoverStyle={{
+ *        border: '1px solid #6C6C6C'
+ *      }}
+ *      focusStyle={{
+ *        borderColor: '#53C7F2',
+ *        boxShadow: 'inset 0 1px 2px #CCC, 0 0 8px #53C7F2'
+ *      }} />
+ *
+ * <p>Two-way data binding: { this.state.customTextInputValue }</p>
+ * 
+ * @example Disabled Text Input
+ * 
+ * <TextInput disabled defaultValue="Maecenas eu placerat ante. Fusce venenatis. Duis tincidunt mi at quam condimentum lobortis condimentum lobortis." />
+ * 
+ */
+
 const newLineRegex = /[\r\n]/g;
 
 const textInputPropTypes = {
   className: PropTypes.string,
+  /**
+   * @property {Integer} minHeight - (optional) Will be deprecated with Belle 2.0.0. We recommend to use minRows.
+   */
   minHeight: PropTypes.number,
+  /**
+   * @property {Integer} maxHeight - (optional) Will be deprecated with Belle 2.0.0. We recommend to use maxRows.
+   */
   maxHeight: PropTypes.number,
+  /**
+   * @property {Integer} minRows - (optional) Once set the TextInput will always keep a minimum height to fit this amount of text input lines. This can be useful to indicate to users that it is expected from them to provide a certain amount of text input.
+   */
   minRows: PropTypes.number,
+  /**
+   * @property {Integer} maxRows - (optional) Once set the TextInput will always keep a maximum height to fit this amount of text input lines. This can be useful to keep your layout sane even with a lot of text input.
+   */
   maxRows: PropTypes.number,
   style: PropTypes.object,
+  /**
+   * @property {Object} hoverStyle - (optional) Works like React's built-in style property except that it extends the properties from the base style. Becomes active once the user hovers over the input with the cursor.
+   */
   hoverStyle: PropTypes.object,
+  /**
+   * @property {Object} focusStyle - (optional) Works like React's built-in style property except that it extends the properties from the base style. Becomes active once the input is the element focused in the DOM.
+   */
   focusStyle: PropTypes.object,
   allowNewLine: PropTypes.bool,
+  /**
+   * @property {Boolean} disabled - (optional) If true the Textarea will be disabled and text can't be manipulated by a user.
+   */
   disabled: PropTypes.bool,
+  /**
+   * @property {Object} disabledStyle - (optional) Works like React's built-in style property except that it extends the properties from the base style. Becomes active once the textarea is disabled.
+   */
   disabledStyle: PropTypes.object,
+  /**
+   * @property {Object} disabledHoverStyle - (optional) Works like React's built-in style property except that it extends the properties from the base disabledStyle. Becomes active once the textarea is disabled and a user hovers over it.
+   */
   disabledHoverStyle: PropTypes.object,
+  /**
+   * @property {Function} onUpdate - (optional) Callback executed every time a user updates the text in the textarea. onUpdate has one argument which is an object containing the value e.g. { value: 'What a beautiful da' }.
+   */
   onUpdate: PropTypes.func,
   onKeyDown: PropTypes.func,
+  /**
+   * @property {String} value - (optional) Behaves like the value property of any React rendered input of type="text" or textarea. The TextInput's field value is set and can not be manipulated through the user interface.
+   */
   value: PropTypes.string,
+  /**
+   * @property {String} defaultValue - (optional) Behaves like the defaultValue property of any React rendered input of type="text" or textarea. The TextInput's field value is set and can be manipulated through the user interface.
+   */
   defaultValue: PropTypes.string,
+  /**
+   * @property {ValueReference} valueLink - (optional) Behaves like the valueLink poperty of any React rendered input of type="text" or textarea. ValueLink allows to enable two-way data binding between a state property and the value in the user interface.
+   */
   valueLink: PropTypes.shape({
     value: PropTypes.string.isRequired,
     requestChange: PropTypes.func.isRequired,

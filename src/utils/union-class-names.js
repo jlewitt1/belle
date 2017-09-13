@@ -1,7 +1,7 @@
 import { union } from '../utils/helpers';
 
 /**
- * Returns a string containing all classes without duplicates.
+ * @description Returns a string containing all classes without duplicates.
  *
  * @param existingClassNames {String} - one or multiple classes
  * @param additionalClassNames {String} - one or multiple classes

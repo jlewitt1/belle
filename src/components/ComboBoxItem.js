@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 /**
- * Belle internal component to wrap an Option in a ComboBox.
- *
+ * @description Belle internal component to wrap an Option in a ComboBox.
  * This component exists to avoid binding functions in JSX.
  */
 export default class ComboBoxItem extends Component {

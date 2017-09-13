@@ -1,3 +1,22 @@
+/**
+ * @description Used for styling the Belle ComboBox component
+ * 
+ * Belle provides you with the ability to modify the default appearance of its components.
+ * 
+ * @example With this example you overwrite the hover style of default Belle Button Component
+ * 
+ * import ComboBoxStyle from 'bit/style/combo-box-style';
+ * 
+ * ComboBoxStyle.hoverStyle = {
+ *  background: '#6FA8D1',
+ *  borderTop: '2px solid #BC5163',
+ *  color: '#fff',
+ * }
+ * 
+ * 
+ * For extended information see the Belle [documentation](http://nikgraf.github.io/belle/#/configuration?_k=pbr5zm)
+ */
+
 const comboBoxStyle = {
 
   style: {

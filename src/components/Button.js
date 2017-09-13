@@ -5,21 +5,115 @@ import unionClassNames from '../utils/union-class-names';
 import { injectStyles, removeStyle } from '../utils/inject-style';
 import config from '../config/button';
 
+/**
+ * @description Belle's button component
+ * 
+ * Note: Belle's Button is rendered as normal HTML button and behaves exactly like it except for these behaviours:
+ * * By default every button is of type="button" instead of "submit"
+ * 
+ * In addition to the props listed below, you can also use any any other property valid for a HTML button like style, onClick, …
+ * 
+ * 
+ * More info:
+ * See live [examples](https://gideonshils.github.io/Belle-With-Bit/).
+ * 
+ * For extended info, go to [Belle](http://nikgraf.github.io/belle/#/component/button?_k=3h2bg1) documentation.
+ * 
+ * 
+ * @example Standard example
+ * 
+ * <!-- primary button -->
+ * <Button primary>Follow</Button>
+ * 
+ * <!-- default button -->
+ * <Button>Follow</Button>
+ * 
+ * 
+ * 
+ * @example Disabled buttons
+ * 
+ * <Button primary style={{marginRight: 10}}>Follow</Button>
+ *
+ * <Button primary disabled style={{marginRight: 10}}>Follow</Button>
+ * 
+ * <Button style={{marginRight: 10}}>Follow</Button>
+ * 
+ * <Button disabled>Follow</Button>
+ * 
+ * 
+ * 
+ * @example Primary button with custom styles
+ *
+ * <Button primary
+ *    style={{
+ *      marginRight: 10,
+ *      color: '#222',
+ *      border: '1px solid #222',
+ *      borderBottom: '1px solid #222',
+ *      borderRadius: 2,
+ *      background: '#fff',
+ *    }}
+ *    hoverStyle={{
+ *      border: '1px solid red',
+ *      borderBottom: '1px solid red',
+ *      color: '#red',
+ *      background: '#fff',
+ *    }}
+ *    focusStyle={{
+ *      border: '1px solid red',
+ *      borderBottom: '1px solid red',
+ *      color: '#red',
+ *      background: '#fff',
+ *      boxShadow: 'red 0px 0px 5px',
+ *    }}
+ *    activeStyle={{
+ *      border: '1px solid red',
+ *      borderTop: '1px solid red',
+ *      color: '#000',
+ *      background: '#fff',
+ *    }}>
+ *  Follow
+ * </Button>
+ * 
+ */
+
 const buttonTypes = ['button', 'submit', 'reset']; // eslint-disable-line no-unused-vars
 
+
 const buttonPropTypes = {
+  /**
+   * @property {Object} activeStyle - (optional) Works like React's built-in style property except that it extends the properties from the base style. Becomes active once the button is pressed by a user, but yet not release.
+   */
   activeStyle: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
   className: PropTypes.string,
+  /**
+   * @property {Boolean} disabled - (default: false) If true the Button will be disabled and can't be pressed by a user.
+   */
   disabled: PropTypes.bool,
+  /**
+   * @property {'button' | 'submit' | 'reset'} type - (default: 'button') This button by is set to type 'button' by default. This different to the default behavior in HTML where a button would submit in case the 'type' attribute is not defined.
+   */
   type: PropTypes.oneOf(buttonTypes),
   style: PropTypes.object,
+  /**
+   * @property {Object} focusStyle - (optional) Works like React's built-in style property except that it extends the properties from the base style. Becomes active once the button is the element focused in the DOM.
+   */
   focusStyle: PropTypes.object,
+  /**
+   * @property {Object} hoverStyle - (optional) Works like React's built-in style property. Becomes active once the user hovers over the button with the cursor.
+   */
   hoverStyle: PropTypes.object,
+  /**
+   * @property {Object} disabledStyle - (optional) Works like React's built-in style property except that it extends the properties from the base style. Becomes active once the button is disabled.
+   */
   disabledStyle: PropTypes.object,
+  /**
+   * @property {Object} disabledHoverStyle - (optional) Works like React's built-in style property except that it extends the properties from the base disabledStyle. Becomes active once the button is disabled and a user hovers over it.
+   */
   disabledHoverStyle: PropTypes.object,
   onTouchStart: PropTypes.func,
   onTouchEnd: PropTypes.func,
@@ -29,9 +123,16 @@ const buttonPropTypes = {
   onMouseLeave: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  /**
+   * @property {Boolean} preventFocusStyleForTouchAndClick (optional) (default: true) - Prevents the focus style being applied in case the buttons becomes focused by a click or touch.
+   */
   preventFocusStyleForTouchAndClick: PropTypes.bool,
+  /**
+   * @property {Boolean} primary - (default: false) If true the Button will be appear with the primary button styles.
+   */
   primary: PropTypes.bool,
 };
+
 
 /**
  * Returns an object with properties that are relevant for the button element.

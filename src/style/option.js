@@ -1,4 +1,22 @@
-const optionStyle = {
+ /**
+ * @description Used for styling the Belle option component
+ * 
+ * Belle provides you with the ability to modify the default appearance of its components.
+ * 
+ * @example With this example you overwrite the  hover style of default Belle Option Component
+ * 
+ * import OptionStyle from 'bit/style/option-style';
+ * 
+ * DatePickerStyle.hoverStyle = {
+ * background: '#fff',
+ * color: '#000',
+ * }
+ * 
+ * 
+ * For extended information see the Belle [documentation](http://nikgraf.github.io/belle/#/configuration?_k=pbr5zm)
+ */
+
+ const optionStyle = {
   style: {
     boxSizing: 'border-box',
     color: '#666',

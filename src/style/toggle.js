@@ -1,3 +1,21 @@
+/**
+ * @description Used for styling the Belle Toggle component
+ * 
+ * Belle provides you with the ability to modify the default appearance of its components.
+ * 
+ * @example With this example you overwrite the focus style of default Belle Toggle Component
+ * 
+ * import ToggleStyle from 'bit/style/toggle-style';
+ * 
+ * ToggleStyle.focusStyle = {
+ *  outline: 0, // to avoid default focus behaviour
+*   borderBottom: '2px solid #6FA8D1',
+ * }
+ * 
+ * 
+ * For extended information see the Belle [documentation](http://nikgraf.github.io/belle/#/configuration?_k=pbr5zm)
+ */
+
 const toggleStyle = {
   style: {
     boxSizing: 'border-box',

@@ -2,6 +2,27 @@ import React, { Component, PropTypes } from 'react';
 import { omit } from '../utils/helpers';
 import style from '../style/placeholder';
 
+/**
+ * @description Belle's placeholder component. Should be used together with Belle's Select
+ * 
+ * In addition to the props listed below, you can also use any property valid for a HTML div like style, id, className, ...
+ * 
+ * More info:
+ * See live [examples](https://gideonshils.github.io/Belle-With-Bit/).
+ * 
+ * For extended info, go to [Belle](http://nikgraf.github.io/belle/#/component/placeholder?_k=parg4w) documentation.
+ *
+ * @example Standard example
+ * 
+ * <!-- basic select example with a placeholder -->
+ * <Select>
+ * <Placeholder>Choose a City</Placeholder>
+ * <Option value="tokyo">Tokyo</Option>
+ * <Option value="vienna">Vienna</Option>
+ * </Select>
+ * 
+ */
+
 const placeholderPropTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

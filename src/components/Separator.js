@@ -2,6 +2,34 @@ import React, { Component, PropTypes } from 'react';
 import { omit } from '../utils/helpers';
 import style from '../style/separator';
 
+/**
+ * @description Belle's separator component. Should be used together with Belle's Select.
+ * 
+ * In addition to the props listed below, you can also use any property valid for a HTML div like style, id, className, ...
+ *
+ * More info:
+ * See live [examples](https://gideonshils.github.io/Belle-With-Bit/).
+ * 
+ * For extended info, go to [Belle](http://nikgraf.github.io/belle/#/component/separator?_k=gntekj) documentation.
+ * 
+ * @example Standard example
+ * 
+ * <!-- basic select example with separators -->
+ * <Select>
+ * <Separator>America</Separator>
+ * <Option value="san-francisco">San Francisco</Option>
+ * <Option value="vancouver">Vancouver</Option>
+ * <Separator>Asia</Separator>
+ * <Option value="hong-kong">Hong Kong</Option>
+ * <Option value="tokyo">Tokyo</Option>
+ * <Separator>Europe</Separator>
+ * <Option value="berlin">Berlin</Option>
+ * <Option value="istanbul">Istanbul</Option>
+ * <Option value="rome">Rome</Option>
+ * <Option value="vienna">Vienna</Option>
+ * </Select>
+ * 
+ */
 const separatorPropTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

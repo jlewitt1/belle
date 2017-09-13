@@ -26,6 +26,192 @@ import Separator from '../components/Separator';
 import SelectItem from '../components/SelectItem';
 
 /**
+ * @description Belle's select component
+ * In its simplest form the select component behaves almost identical to the
+ * native HTML select which the exception that it comes with beautiful styles.
+ * Note: The select is designed to behave exactly like the native select tag with the benefit that you have full control over its appearance. You might want to try navigating the options with your keyboard.
+ * 
+ * In addition to the props listed below, you can also use any other property valid for a Div element like style, onClick, ... 
+ * * The properties will directly applied to the wrapper for the selected option.
+ * 
+ * More info:
+ * See live [examples](https://gideonshils.github.io/Belle-With-Bit/).
+ * 
+ * For extended info, go to [Belle](http://nikgraf.github.io/belle/#/component/select?_k=3qbax1) documentation.
+ *
+ * @example Standard example
+ * 
+ * <Select defaultValue="rome">
+ *   <Option value="vienna">Vienna</Option>
+ *   <Option value="rome">Rome</Option>
+ * </Select>
+ * 
+ * @example Internal HTML Structure
+ * This should help developer to understand how the Select is structured in order to use the API
+ * 
+ * <div tabIndex="0"
+ *    style={ wrapperStyle }>
+ * <div style={ style }>
+ *   <Option /> or <Placeholder />
+ *   <span style={ caretToCloseStyle or caretToOpenStyle } />
+ * </div>
+ * <ul style={ menuStyle }>
+ *   <li>
+ *     <Option /> or <Separator />
+ *   </li>
+ *   <li>
+ *     <Option /> or <Separator />
+ *   </li>
+ *   … more entries …
+ * </ul>
+ * </div>
+ * 
+ * 
+ * @example Select from a dynamic data set including a defaultValue & onUpdate callback
+ * 
+ * <!-- defining the data -->
+ * var fruits = [
+ * { value: "pineapple", content: (<span>🍍 Pineapple</span>) },
+ * { value: "banana", content: (<span>🍌 Banana</span>) },
+ * { value: "peach", content: (<span>🍑 Peach</span>) },
+ * { value: "pear", content: (<span>🍐 Pear</span>) },
+ * { value: "cherries", content: (<span>🍒 Cherries</span>) }
+ * ];
+ * 
+ * 
+ * <!-- filling a select with Option  -->
+ * <Select defaultValue={ fruits[3].value }
+ *       onUpdate={ function(event) { console.log(event.value); }}>
+ * {
+ *   fruits.map(function(fruit, index) {
+ *     return (
+ *       <Option value={ fruit.value }
+ *               key={ index }>
+ *         { fruit.content }
+ *       </Option>
+ *     );
+ *   })
+ * }
+ * </Select>
+ * 
+ * 
+ * @example Select as part of a form with a scrollable menu
+ * 
+ * <!-- form consiting of an input & a select  -->
+ * <div style={{ display: 'table' }}>
+ * <TextInput style={{ width: 138,
+ *                      float: 'left'}}
+ *            placeholder="Fill in your address …" />
+ *          <div style={{ width: 110,
+ *                         float: 'left',
+ *                         marginLeft: 16 }}>
+ *   <Select defaultValue="tokyo"
+ *           menuStyle={{ height: 160,
+ *                                overflow: 'scroll' }}>
+ *     <Option value="berlin">Berlin</Option>
+ *     <Option value="hong-kong">Hong Kong</Option>
+ *     <Option value="istanbul">Istanbul</Option>
+ *     <Option value="rome">Rome</Option>
+ *     <Option value="san-francisco">San Francisco</Option>
+ *     <Option value="tokyo">Tokyo</Option>
+ *     <Option value="vienna">Vienna</Option>
+ *   </Select>
+ * </div>
+ * </div>
+ * 
+ * 
+ * @example Select with Separators
+ * 
+ * <!-- basic select example with separators -->
+ * <Select>
+ * <Separator>Asia</Separator>
+ * <Option value="hong-kong">Hong Kong</Option>
+ * <Option value="tokyo">Tokyo</Option>
+ * <Separator>Europe</Separator>
+ * <Option value="berlin">Berlin</Option>
+ * <Option value="istanbul">Istanbul</Option>
+ * </Select>
+ * 
+ * 
+ * @example Select with various Option styles
+ * 
+ * <!-- select example with more advanced styling -->
+ * <Select menuStyle={{ padding: 6 }}>
+ * <Placeholder>Choose your next Vacation</Placeholder>
+ * <Option value="santorini"
+ *         style={{
+ *           padding: '15px 0 0 60px',
+ *           height: 50,
+ *           background: 'url(images/santorini_100.jpg) no-repeat',
+ *           backgroundSize: '50px 50px',
+ *           backgroundColor: '#FFEE82'
+ *         }}
+ *         hoverStyle={{
+ *           padding: '15px 0 0 60px',
+ *           height: 50,
+ *           background: 'url(images/santorini_100.jpg) no-repeat',
+ *           backgroundSize: '50px 50px',
+ *           backgroundColor: '#FFE95D'
+ *         }} >
+ *   Santorini (Special Deal)
+ * </Option>
+ * <Separator style={{ height: 4, padding: 0 }}></Separator>
+ * <Option value="yosemite"
+ *         style={{
+ *           padding: '15px 0 0 60px',
+ *           height: 50,
+ *           background: 'url(images/yosemite_100.jpg) no-repeat',
+ *           backgroundSize: '50px 50px'
+ *         }}
+ *         hoverStyle={{
+ *           padding: '15px 0 0 60px',
+ *           height: 50,
+ *           backgroundColor: '#F5F5F5',
+ *           background: 'url(images/yosemite_100.jpg) no-repeat',
+ *           backgroundSize: '50px 50px'
+ *         }} >
+ *   Yosemite
+ * </Option>
+ * <Separator style={{ height: 4, padding: 0 }}></Separator>
+ * <Option value="croatia"
+ *         style={{
+ *           padding: '15px 0 0 60px',
+ *           height: 50,
+ *           background: 'url(images/croatia_100.jpg) no-repeat',
+ *           backgroundSize: '50px 50px'
+ *         }}
+ *         hoverStyle={{
+ *           padding: '15px 0 0 60px',
+ *           height: 50,
+ *           backgroundColor: '#F5F5F5',
+ *           background: 'url(images/croatia_100.jpg) no-repeat',
+ *           backgroundSize: '50px 50px'
+ *         }} >
+ *   Croatia
+ * </Option>
+ * </Select>
+ * 
+ * 
+ * @example Select with a custom positionOptions function
+ * 
+ * <!-- custom positionOptions function in your JS code -->
+ * function positionOptions (selectComponent) {
+ * const menuNode = ReactDOM.findDOMNode(selectComponent.refs.menu);
+ * menuNode.style.top = '35px';
+ * }
+ * 
+ * 
+ * <!-- select with a custom positionOptions function -->
+ * <Select positionOptions={ positionOptions }>
+ * <Placeholder>Choose a City</Placeholder>
+ * <Option value="berlin">Berlin</Option>
+ * <Option value="tokyo">Tokyo</Option>
+ * <Option value="vienna">Vienna</Option>
+ * </Select>
+ * 
+ */
+
+/**
  * Returns true if the provided property is a Placeholder component from Belle.
  */
 function isPlaceholder(reactElement) {
@@ -68,39 +254,93 @@ function validateChildrenAreOptionsAndMaximumOnePlaceholder(props, propName, com
 
 const selectPropTypes = {
   children: validateChildrenAreOptionsAndMaximumOnePlaceholder,
+  /**
+   * @property {String | Boolean | Number} value - (optional) Behaves like the value property of a native select-tag. The Option with the same value is initially used as selected and can not be manipulated through the user interface.
+   */
   value: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string,
     PropTypes.number,
     PropTypes.instanceOf(Date),
   ]),
+  /**
+   * @property {String | Boolean | Number} defaultValue - (optional) Behaves like the defaultValue property of a native select-tag. The Option with the same value is initially used as selected and can be manipulated through the user interface.
+   */
   defaultValue: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string,
     PropTypes.number,
   ]),
+  /**
+   * @property {Function} onUpdate - (optional) Callback executed every time an Option is selected. onUpdate has one argument which is an object containing the value e.g. { value: 'Rome' }.
+   */
   onUpdate: PropTypes.func,
+  /**
+   * @property {ValueReference} valueLink - (optional) Behaves like the valueLink property of a native select-tag. ValueLink allows to enable two-way data binding between a state property and the value in the user interface.
+   */
   valueLink: PropTypes.shape({
     value: PropTypes.string.isRequired,
     requestChange: PropTypes.func.isRequired,
   }),
   className: PropTypes.string,
+  /**
+   * @property {Boolean} shouldPositionOptions - (optional. default: true)  If set to true the menu is repositioned after opening it to position the focused Option right on top of the already selected one. 
+   */
   shouldPositionOptions: PropTypes.bool,
+  /**
+   * @property {Function(this)} positionOptions - (optional) A function called after the user opens the menu. The function's purpose is to reposition the menu to improve the user experience.
+   */
   positionOptions: PropTypes.func,
   style: PropTypes.object,
+  /**
+   * @property {Object} focusStyle - (optional) Works like React's built-in style property except that it extends the properties from the base style. Becomes active once the select is the element focused in the DOM.
+   */
   focusStyle: PropTypes.object,
+  /**
+   * @property {Object} hoverStyle - (optional) Works like React's built-in style property except that it extends the properties from the base style. Becomes active once the user hovers over the select with the cursor.
+   */
   hoverStyle: PropTypes.object,
   activeStyle: PropTypes.object,
+  /**
+   * @property {Object} wrapperStyle - (optional) Works like React's built-in style property. Manipulates the styling for the div-tag wrapped around the component.
+   */
   wrapperStyle: PropTypes.object,
   menuStyle: PropTypes.object,
+  /**
+   * @property {Object} caretToOpenStyle - (optional) Works like React's built-in style property. Manipulates the styling for the caret when the options to select from are not visible.
+   */
   caretToOpenStyle: PropTypes.object,
+  /**
+   * @property {Object} caretToCloseStyle - (optional) Works like React's built-in style property. Manipulates the styling for the caret when the options to select from are visible.
+   */
   caretToCloseStyle: PropTypes.object,
+  /**
+   * @property {Object} wrapperProps - (optional) This object allows to provide any kind of valid properties for a div tag. It allows to extend the div wrapping the whole select component.
+   */
   wrapperProps: PropTypes.object,
+  /**
+   * @property {Object} menuProps - (optional) This object allows to provide any kind of valid properties for a ul tag. It allows to extend the ul wrapping the available options.
+   */
   menuProps: PropTypes.object,
+  /**
+   * @property {Object} caretProps - (optional) This object allows to provide any kind of valid properties for a span tag.
+   */
   caretProps: PropTypes.object,
+  /**
+   * @property {Boolean} disabled - (optional. default: false) If true the Select will be disabled and can't be changed by the user.
+   */
   disabled: PropTypes.bool,
+  /**
+   * @property {Object} disabledStyle - (optional) Works like React's built-in style property. Becomes active once the Select is disabled.
+   */
   disabledStyle: PropTypes.object,
+  /**
+   * @property {Object} disabledHoverStyle - (optional) Works like React's built-in style property except that it extends the properties from the base disabledStyle. Becomes active once the Select is disabled and a user hovers over it.
+   */
   disabledHoverStyle: PropTypes.object,
+  /**
+   * @property {Object} disabledCaretToOpenStyle - (optional) Works like React's built-in style property except that it extends the properties from the base disabledCaretToOpenStyle. Is applied to the Caret once the Select is disabled.
+   */
   disabledCaretToOpenStyle: PropTypes.object,
   id: PropTypes.string,
   onClick: PropTypes.func,

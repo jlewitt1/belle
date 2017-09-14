@@ -488,5 +488,27 @@
         ],
         "mainFile": "src/components/Toggle.js",
         "origin": "AUTHORED"
+    },
+    "style/select": {
+        "files": [
+            {
+                "relativePath": "src/style/select.js",
+                "test": false,
+                "name": "select.js"
+            }
+        ],
+        "mainFile": "src/style/select.js",
+        "origin": "AUTHORED"
+    },
+    "config/select": {
+        "files": [
+            {
+                "relativePath": "src/config/select.js",
+                "test": false,
+                "name": "select.js"
+            }
+        ],
+        "mainFile": "src/config/select.js",
+        "origin": "AUTHORED"
     }
 }

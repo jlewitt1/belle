@@ -18,8 +18,7 @@ import config from '../config/button';
  * See live [examples](https://gideonshils.github.io/Belle-With-Bit/).
  * 
  * For extended info, go to [Belle](http://nikgraf.github.io/belle/#/component/button?_k=3h2bg1) documentation.
- * 
- * 
+ *
  * @example Standard example
  * 
  * <!-- primary button -->
@@ -27,8 +26,6 @@ import config from '../config/button';
  * 
  * <!-- default button -->
  * <Button>Follow</Button>
- * 
- * 
  * 
  * @example Disabled buttons
  * 
@@ -39,8 +36,6 @@ import config from '../config/button';
  * <Button style={{marginRight: 10}}>Follow</Button>
  * 
  * <Button disabled>Follow</Button>
- * 
- * 
  * 
  * @example Primary button with custom styles
  *

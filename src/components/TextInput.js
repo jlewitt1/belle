@@ -25,7 +25,6 @@ import style from '../style/text-input';
  * <!-- TextInput with allowNewLine set to true -->
  * <TextInput defaultValue="This TextInput has allowNewLine set to true. Just press 'Return' once editing the text." allowNewLine />
  * 
- * 
  * @example TextInput with custom styling & two-way data binding
  * 
  * <TextInput minRows={ 3 }

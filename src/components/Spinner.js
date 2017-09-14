@@ -6,7 +6,6 @@ import spinnerStyle from '../style/spinner';
  * 
  * In addition to the props listed below, you can also use any property valid for a HTML div like style, id, className, ...
  * 
- * 
  * More info:
  * See live [examples](https://gideonshils.github.io/Belle-With-Bit/).
  * 
@@ -16,7 +15,6 @@ import spinnerStyle from '../style/spinner';
  * 
  * <!-- basic spinner example -->
  * <Spinner />
- * 
  * 
  * @example Button while loading
  * 
@@ -28,7 +26,6 @@ import spinnerStyle from '../style/spinner';
  * <Button disabled style={{ marginLeft: 10 }}>
  * Saving <Spinner characterStyle={{ fontSize: 18, color: '#C5C4C4' }} />
  * </Button>
- * 
  * 
  * @example Card with a loading indicator
  * 

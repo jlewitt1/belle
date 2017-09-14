@@ -27,7 +27,6 @@ import Choice from '../components/Choice';
  * <Choice value={ false }>Off</Choice>
  * </Toggle>
  *
- * 
  * @example Internal HTML Structure
  * 
  * <div style={ wrapperStyle }
@@ -49,7 +48,6 @@ import Choice from '../components/Choice';
  *      style={ handleStyle } />
  * </div>
  * 
- * 
  * @example Toggle with custom choices
  * 
  * <!-- toggle with custom choices -->
@@ -59,12 +57,10 @@ import Choice from '../components/Choice';
  * <Choice value={ false }>Off</Choice>
  * </Toggle>
  * 
- * 
  * @example Toggle with adopted size styling - using CSS 'transform' property
  * When you need to change the size of a component don't forget the CSS transform property. With the -ms- prefix transform is supported back to IE 9.
  * 
  * <Toggle style={{ transform: 'scale(0.6)' }} />
- * 
  * 
  * @example Toggle with adopted size styling - using style properties
  * Toggle can also be re-sized by proportionately changing the size of all the components in structure of Toggle.

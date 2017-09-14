@@ -16,5 +16,290 @@
         ],
         "origin": "AUTHORED",
         "mainFile": "src/utils/helpers.js"
+    },
+    "utils/union-class-names": {
+        "files": [
+            {
+                "relativePath": "src/utils/union-class-names.js",
+                "test": false,
+                "name": "union-class-names.js"
+            },
+            {
+                "relativePath": "src/__tests__/union-class-names-test.js",
+                "test": true,
+                "name": "union-class-names-test.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/utils/union-class-names.js"
+    },
+    "utils/date-helpers": {
+        "files": [
+            {
+                "relativePath": "src/utils/date-helpers.js",
+                "test": false,
+                "name": "date-helpers.js"
+            },
+            {
+                "relativePath": "src/__tests__/date-helpers-test.js",
+                "test": true,
+                "name": "date-helpers-test.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/utils/date-helpers.js"
+    },
+    "utils/inject-style": {
+        "files": [
+            {
+                "relativePath": "src/utils/inject-style.js",
+                "test": false,
+                "name": "inject-style.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/utils/inject-style.js"
+    },
+    "utils/is-component-of-type": {
+        "files": [
+            {
+                "relativePath": "src/utils/is-component-of-type.js",
+                "test": false,
+                "name": "is-component-of-type.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/utils/is-component-of-type.js"
+    },
+    "utils/calculate-textarea-height": {
+        "files": [
+            {
+                "relativePath": "src/utils/calculate-textarea-height.js",
+                "test": false,
+                "name": "calculate-textarea-height.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/utils/calculate-textarea-height.js"
+    },
+    "utils/animation-frame-management": {
+        "files": [
+            {
+                "relativePath": "src/utils/animation-frame-management.js",
+                "test": false,
+                "name": "animation-frame-management.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/utils/animation-frame-management.js"
+    },
+    "style/action-area": {
+        "files": [
+            {
+                "relativePath": "src/style/actionArea.js",
+                "test": false,
+                "name": "actionArea.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/actionArea.js"
+    },
+    "style/animations": {
+        "files": [
+            {
+                "relativePath": "src/style/animations.js",
+                "test": false,
+                "name": "animations.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/animations.js"
+    },
+    "style/button": {
+        "files": [
+            {
+                "relativePath": "src/style/button.js",
+                "test": false,
+                "name": "button.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/button.js"
+    },
+    "style/card": {
+        "files": [
+            {
+                "relativePath": "src/style/card.js",
+                "test": false,
+                "name": "card.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/card.js"
+    },
+    "style/combo-box": {
+        "files": [
+            {
+                "relativePath": "src/style/combo-box.js",
+                "test": false,
+                "name": "combo-box.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/combo-box.js"
+    },
+    "style/date-picker": {
+        "files": [
+            {
+                "relativePath": "src/style/date-picker.js",
+                "test": false,
+                "name": "date-picker.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/date-picker.js"
+    },
+    "style/option": {
+        "files": [
+            {
+                "relativePath": "src/style/option.js",
+                "test": false,
+                "name": "option.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/option.js"
+    },
+    "style/placeholder": {
+        "files": [
+            {
+                "relativePath": "src/style/placeholder.js",
+                "test": false,
+                "name": "placeholder.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/placeholder.js"
+    },
+    "style/rating": {
+        "files": [
+            {
+                "relativePath": "src/style/rating.js",
+                "test": false,
+                "name": "rating.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/rating.js"
+    },
+    "style/select": {
+        "files": [
+            {
+                "relativePath": "src/style/select.js",
+                "test": false,
+                "name": "select.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/select.js"
+    },
+    "style/separator": {
+        "files": [
+            {
+                "relativePath": "src/style/separator.js",
+                "test": false,
+                "name": "separator.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/separator.js"
+    },
+    "style/spinner": {
+        "files": [
+            {
+                "relativePath": "src/style/spinner.js",
+                "test": false,
+                "name": "spinner.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/spinner.js"
+    },
+    "style/text-input": {
+        "files": [
+            {
+                "relativePath": "src/style/text-input.js",
+                "test": false,
+                "name": "text-input.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/text-input.js"
+    },
+    "style/toggle": {
+        "files": [
+            {
+                "relativePath": "src/style/toggle.js",
+                "test": false,
+                "name": "toggle.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/style/toggle.js"
+    },
+    "config/button": {
+        "files": [
+            {
+                "relativePath": "src/config/button.js",
+                "test": false,
+                "name": "button.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/config/button.js"
+    },
+    "config/date-picker": {
+        "files": [
+            {
+                "relativePath": "src/config/datePicker.js",
+                "test": false,
+                "name": "datePicker.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/config/datePicker.js"
+    },
+    "config/i18n": {
+        "files": [
+            {
+                "relativePath": "src/config/i18n.js",
+                "test": false,
+                "name": "i18n.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/config/i18n.js"
+    },
+    "config/rating": {
+        "files": [
+            {
+                "relativePath": "src/config/rating.js",
+                "test": false,
+                "name": "rating.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/config/rating.js"
+    },
+    "config/toggle": {
+        "files": [
+            {
+                "relativePath": "src/config/toggle.js",
+                "test": false,
+                "name": "toggle.js"
+            }
+        ],
+        "origin": "AUTHORED",
+        "mainFile": "src/config/toggle.js"
     }
 }
